@@ -1,0 +1,19 @@
+Steps to unblock Assignment1_Adv.dll
+
+1) Unblock via File Properties (GUI):
+   - Right-click the DLL file (C:\Users\LOQ\source\repos\Assignment1_Adv\Assignment1_Adv\bin\Debug\net10.0\Assignment1_Adv.dll)
+   - Properties -> General tab -> If present, check "Unblock" -> Apply -> OK
+
+2) Unblock via PowerShell:
+   - Open PowerShell (not necessarily admin):
+	 Unblock-File -Path "C:\Users\LOQ\source\repos\Assignment1_Adv\Assignment1_Adv\bin\Debug\net10.0\Assignment1_Adv.dll"
+
+3) Confirm removal of Zone.Identifier (optional):
+   - Get-Content -Path "C:\Users\LOQ\source\repos\Assignment1_Adv\Assignment1_Adv\bin\Debug\net10.0\Assignment1_Adv.dll:Zone.Identifier" -ErrorAction SilentlyContinue
+   - If no output, the ADS was removed.
+
+4) Retry running/debugging the application.
+
+If the block persists, collect Event Viewer logs:
+   - Event Viewer -> Applications and Services Logs -> Microsoft -> Windows -> AppLocker (or Windows Defender/Device Guard) -> Exe, DLL, MSI and Script
+   - Share the most recent blocking event details (Event ID, rule name, publisher, SHA256) for further analysis.
